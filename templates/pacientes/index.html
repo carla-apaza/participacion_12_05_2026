@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %} PACIENTES {% endblock %}
+
+{% block content %}
+
+<h1>Lista de pacientes</h1>
+<a href="{{url_for('paciente.create')}}" class="btn btn-success mb-3">Nuevo</a>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>edad</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    {%for item in pacientes%}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.edad}}</td>
+        <td>{{item.direccion}}</td>
+        <td>{{item.telefono}}</td>
+        <td>
+            <a href="{{url_for('paciente.edit', id=item.id)}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{url_for('paciente.delete', id=item.id)}}"
+                onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?');"
+                class="btn btn-danger">Eliminar</a>
+        </td>
+        <td>
+            <a href="{{ url_for('paciente.historial', id=item.id) }}" class="btn btn-info">
+                Historial
+            </a>
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+
+
+{% endblock %}

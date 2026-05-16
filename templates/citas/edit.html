@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %} CITAS | EDIT {% endblock %}
+
+{% block content %}
+
+<h1>Actualización de cita</h1>
+
+<form action="{{ url_for('cita.edit', id=cita.id) }}" method="POST">
+
+    <div class="mb-3">
+        <label class="form-label">Fecha</label>
+
+        <input type="date" class="form-control" name="fecha" value="{{ cita.fecha }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Hora</label>
+
+        <input type="time" class="form-control" name="hora" value="{{ cita.hora }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Motivo</label>
+
+        <input type="text" class="form-control" name="motivo" value="{{ cita.motivo }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Médico</label>
+
+        <select name="id_medico" class="form-select" required>
+
+            {% for item in medicos %}
+
+            <option value="{{ item.id }}" {% if item.id==cita.id_medico %}selected{% endif %}>
+                {{ item.nombre }} - {{ item.especialidad }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Paciente</label>
+
+        <select name="id_paciente" class="form-select" required>
+
+            {% for item in pacientes %}
+
+            <option value="{{ item.id }}" {% if item.id==cita.id_paciente %}selected{% endif %}>
+                {{ item.nombre }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Actualizar cita
+    </button>
+
+    <a href="{{ url_for('cita.index') }}" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>
+
+{% endblock %}

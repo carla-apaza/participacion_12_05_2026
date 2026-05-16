@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %} BUSCAR CONSULTAS {% endblock %}
+
+{% block content %}
+
+<h1>Buscar consultas por fecha</h1>
+
+<form method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">Fecha</label>
+
+        <input type="date" class="form-control" name="fecha" required>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Buscar
+    </button>
+
+</form>
+
+<hr>
+
+<table class="table table-striped">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>Fecha</th>
+            <th>Diagnóstico</th>
+            <th>Tratamiento</th>
+            <th>Médico</th>
+            <th>Paciente</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for item in consultas %}
+
+        <tr>
+
+            <td>{{ item.fecha }}</td>
+            <td>{{ item.diagnostico }}</td>
+            <td>{{ item.tratamiento }}</td>
+            <td>{{ item.medico.nombre }}</td>
+            <td>{{ item.paciente.nombre }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

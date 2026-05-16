@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %} HISTORIAL MEDICO {% endblock %}
+
+{% block content %}
+
+<h1>Historial médico</h1>
+
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h4>Datos del paciente</h4>
+
+        <p><strong>Nombre:</strong> {{ paciente.nombre }}</p>
+        <p><strong>Edad:</strong> {{ paciente.edad }}</p>
+        <p><strong>Dirección:</strong> {{ paciente.direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ paciente.telefono }}</p>
+
+    </div>
+
+</div>
+
+<h3>Consultas registradas</h3>
+
+<table class="table table-striped">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>Fecha</th>
+            <th>Diagnóstico</th>
+            <th>Tratamiento</th>
+            <th>Médico</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for item in consultas %}
+
+        <tr>
+
+            <td>{{ item.fecha }}</td>
+            <td>{{ item.diagnostico }}</td>
+            <td>{{ item.tratamiento }}</td>
+            <td>{{ item.medico.nombre }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<a href="{{ url_for('paciente.index') }}" class="btn btn-secondary">
+    Volver
+</a>
+
+{% endblock %}
